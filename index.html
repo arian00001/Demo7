@@ -1,0 +1,2887 @@
+<!doctype html>
+<html lang="en" class="is-loading">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Maison Verrel — The Rail</title>
+    <meta name="description" content="Maison Verrel — The Rail boutique hero. Silhouettes that hang right." />
+    <meta property="og:title" content="Maison Verrel — The Rail" />
+    <meta property="og:description" content="Maison Verrel — The Rail boutique hero. Silhouettes that hang right." />
+    <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://images.higgs.ai" />
+    <style>
+      @font-face {
+        font-family: "Inter";
+        font-style: normal;
+        font-weight: 100 900;
+        font-display: swap;
+        src: url("https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2") format("woff2");
+      }
+
+      @font-face {
+        font-family: "Cormorant Garamond";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("https://fonts.gstatic.com/s/cormorantgaramond/v21/co3umX5slCNuHLi8bLeY9MK7whWMhyjypVO7abI26QOD_s06KnTOig.woff2") format("woff2");
+      }
+
+      :root {
+        --bg: #FAF7F2;
+        --util: #EFEBE4;
+        --ink: #1A1716;
+        --muted: #746A5E;
+        --line: #DDD5C9;
+        --pill: #EDE8DF;
+        --tag: #F6F1E7;
+        --btn: #0E0D0C;
+        --u: 1px;
+        --rail-top: 270;
+        --rail-sag: 74;
+        --gap: 121;
+        --gs: .455;
+        --start: 113;
+      }
+
+      @media (max-width: 820px) {
+        :root {
+          --rail-top: 292;
+          --rail-sag: 30;
+          --gap: 80;
+          --gs: .30;
+          --start: 46;
+        }
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Inter", system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      button {
+        font-family: inherit;
+        color: inherit;
+      }
+
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible {
+        outline: 1.5px solid var(--ink);
+        outline-offset: 2px;
+      }
+
+      /* Loading guard */
+      html.is-loading .garments,
+      html.is-loading .headline-word,
+      html.is-loading .foot-left,
+      html.is-loading .prog,
+      html.is-loading .foot-right {
+        opacity: 0;
+      }
+
+      /* Page wrapper */
+      .page {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        background: var(--bg);
+        transition: right 0.6s cubic-bezier(.22, 1, .36, 1);
+      }
+
+      body.cart-open .page {
+        right: calc(560 * var(--u));
+      }
+
+      /* Stage */
+      .stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        transition: opacity 0.45s ease, filter 0.45s ease;
+      }
+
+      body.qv-open .stage {
+        opacity: 0;
+        filter: blur(8px);
+        pointer-events: none;
+      }
+
+      /* Utility bar */
+      .util-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: calc(31 * var(--u));
+        background: var(--util);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding-right: calc(48 * var(--u));
+        z-index: 6;
+      }
+
+      .util-bar a {
+        font-size: calc(13.5 * var(--u));
+        color: #6B655D;
+        text-decoration: none;
+        white-space: nowrap;
+        line-height: 1;
+        transition: color 0.2s ease;
+      }
+
+      .util-bar a:hover {
+        color: var(--ink);
+      }
+
+      .util-bar a + a::before {
+        content: "|";
+        color: #A39C92;
+        margin: 0 calc(15 * var(--u));
+        pointer-events: none;
+      }
+
+      /* Nav row */
+      .nav-row {
+        position: absolute;
+        top: calc(31 * var(--u));
+        left: 0;
+        right: 0;
+        height: calc(72 * var(--u));
+        z-index: 6;
+      }
+
+      .wordmark {
+        position: absolute;
+        left: calc(47 * var(--u));
+        top: calc(20 * var(--u));
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-weight: 500;
+        font-size: calc(23.6 * var(--u));
+        letter-spacing: 0.075em;
+        line-height: 1;
+        color: var(--ink);
+        text-decoration: none;
+        white-space: nowrap;
+        user-select: none;
+      }
+
+      .nav-links {
+        position: absolute;
+        left: 50%;
+        translate: -50% 0;
+        transform: translateX(calc(-8 * var(--u)));
+        top: calc(25 * var(--u));
+        display: flex;
+        align-items: center;
+        gap: calc(42 * var(--u));
+        transition: left 0.6s cubic-bezier(.22, 1, .36, 1);
+      }
+
+      body.cart-open .nav-links {
+        left: calc(50% + 24 * var(--u));
+      }
+
+      .nav-links a {
+        font-weight: 500;
+        font-size: calc(15.5 * var(--u));
+        color: var(--ink);
+        text-decoration: none;
+        white-space: nowrap;
+        line-height: 1.2;
+        transition: opacity 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        opacity: 0.6;
+      }
+
+      .nav-tools {
+        position: absolute;
+        right: calc(64 * var(--u));
+        top: calc(16 * var(--u));
+        display: flex;
+        align-items: center;
+      }
+
+      .search-pill {
+        width: calc(150 * var(--u));
+        height: calc(40 * var(--u));
+        border-radius: calc(20 * var(--u));
+        background: var(--pill);
+        padding-left: calc(29 * var(--u));
+        padding-right: calc(12 * var(--u));
+        display: flex;
+        align-items: center;
+        gap: calc(14 * var(--u));
+        overflow: hidden;
+        cursor: text;
+        transition: width 0.6s cubic-bezier(.22, 1, .36, 1), padding-left 0.6s cubic-bezier(.22, 1, .36, 1), padding-right 0.6s cubic-bezier(.22, 1, .36, 1);
+      }
+
+      body.cart-open .search-pill {
+        width: calc(40 * var(--u));
+        padding-left: calc(10.5 * var(--u));
+        padding-right: 0;
+        cursor: pointer;
+      }
+
+      .search-pill svg {
+        width: calc(19 * var(--u));
+        height: calc(19 * var(--u));
+        flex-shrink: 0;
+        display: block;
+      }
+
+      .search-input {
+        border: 0;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        min-width: 0;
+        font-family: inherit;
+        font-size: calc(15 * var(--u));
+        color: var(--ink);
+        line-height: 1.2;
+        outline: none;
+      }
+
+      .search-input::placeholder {
+        color: #8B857C;
+        opacity: 1;
+      }
+
+      .icon-btn {
+        border: 0;
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .account-btn {
+        margin-left: calc(26 * var(--u));
+        width: calc(22 * var(--u));
+        height: calc(22 * var(--u));
+      }
+
+      .account-btn svg,
+      .bag-btn svg {
+        width: calc(22 * var(--u));
+        height: calc(22 * var(--u));
+        display: block;
+      }
+
+      .bag-btn {
+        margin-left: calc(32 * var(--u));
+        width: calc(22 * var(--u));
+        height: calc(22 * var(--u));
+      }
+
+      .bag-badge {
+        position: absolute;
+        left: calc(12 * var(--u));
+        top: calc(-9 * var(--u));
+        height: calc(18 * var(--u));
+        min-width: calc(18 * var(--u));
+        padding: 0 calc(5 * var(--u));
+        border-radius: 999px;
+        background: var(--btn);
+        color: #fff;
+        font-weight: 600;
+        font-size: calc(10.5 * var(--u));
+        line-height: calc(18 * var(--u));
+        text-align: center;
+        font-variant-numeric: tabular-nums;
+        pointer-events: none;
+      }
+
+      /* Eyebrow */
+      .eyebrow {
+        position: absolute;
+        top: calc(144 * var(--u));
+        left: 50%;
+        translate: -50% 0;
+        display: flex;
+        align-items: center;
+        gap: calc(17 * var(--u));
+        white-space: nowrap;
+        z-index: 4;
+        user-select: none;
+      }
+
+      .eyebrow-left {
+        font-weight: 600;
+        font-size: calc(12.4 * var(--u));
+        letter-spacing: 0.18em;
+        color: #5A5148;
+        line-height: 1;
+      }
+
+      .eyebrow-div {
+        width: max(1px, calc(1 * var(--u)));
+        height: calc(13 * var(--u));
+        background: #C9C0B3;
+        flex-shrink: 0;
+      }
+
+      .eyebrow-right {
+        font-weight: 600;
+        font-size: calc(12.4 * var(--u));
+        letter-spacing: 0.213em;
+        color: #8A7F72;
+        line-height: 1;
+      }
+
+      /* Headline */
+      .headline {
+        position: absolute;
+        top: calc(176 * var(--u));
+        left: 50%;
+        translate: -50% 0;
+        margin: 0;
+        font-weight: 600;
+        font-size: calc(62 * var(--u));
+        letter-spacing: -0.035em;
+        line-height: 1.1;
+        white-space: nowrap;
+        z-index: 4;
+        user-select: none;
+      }
+
+      .headline-word {
+        display: inline-block;
+        margin-right: 0.24em;
+      }
+
+      .headline-word:last-child {
+        margin-right: 0;
+      }
+
+      .hw-0 { color: #141210; }
+      .hw-1 { color: #54493F; }
+      .hw-2 { color: #75675A; }
+      .hw-3 {
+        background: linear-gradient(90deg, #A6968A, #C6B8A9);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      /* Rail zone */
+      .rail-zone {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: calc(230 * var(--u));
+        bottom: calc(120 * var(--u));
+        touch-action: pan-y;
+        cursor: grab;
+        user-select: none;
+        -webkit-user-select: none;
+        z-index: 3;
+      }
+
+      .rail-zone.dragging {
+        cursor: grabbing;
+      }
+
+      .rail-svg {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .garments {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .g {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 0;
+        height: 0;
+        z-index: 1;
+        will-change: transform;
+      }
+
+      .g.hov {
+        z-index: 5;
+      }
+
+      .g.qv-hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .g.qv-hidden .hit {
+        pointer-events: none;
+      }
+
+      .drop {
+        position: relative;
+        width: 0;
+        height: 0;
+      }
+
+      .sway {
+        position: relative;
+        width: 0;
+        height: 0;
+        transform-origin: 0 0;
+        will-change: transform;
+      }
+
+      .lift {
+        position: relative;
+        width: 0;
+        height: 0;
+        transform-origin: 0 0;
+        perspective: calc(700 * var(--u));
+        transition: transform 0.42s cubic-bezier(.22, 1, .36, 1);
+      }
+
+      .g.hov .lift {
+        transform: translateY(calc(12 * var(--u))) scale(1.2);
+      }
+
+      .face {
+        position: absolute;
+        top: 0;
+        background-repeat: no-repeat;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform-origin: 50% 0;
+        pointer-events: none;
+      }
+
+      .face.side {
+        transform: rotateY(0deg);
+        transition: transform 0.15s cubic-bezier(0, 0, .3, 1) 0.15s;
+      }
+
+      .face.front {
+        transform: rotateY(90deg);
+        transition: transform 0.15s cubic-bezier(.5, 0, 1, 1) 0s;
+      }
+
+      .g.hov .face.side {
+        transform: rotateY(-90deg);
+        transition: transform 0.15s cubic-bezier(.5, 0, 1, 1) 0s;
+      }
+
+      .g.hov .face.front {
+        transform: rotateY(0deg);
+        transition: transform 0.15s cubic-bezier(0, 0, .3, 1) 0.15s;
+      }
+
+      .tag {
+        position: absolute;
+        left: calc(-6 * var(--u));
+        top: calc(52 * var(--u));
+        width: calc(35 * var(--u));
+        height: calc(19 * var(--u));
+        background: var(--tag);
+        border-radius: calc(2 * var(--u));
+        box-shadow: 0 calc(1 * var(--u)) calc(3 * var(--u)) rgba(60, 45, 30, .18);
+        font-weight: 600;
+        font-size: calc(9.6 * var(--u));
+        color: #2A2420;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: calc(2 * var(--u));
+        line-height: 1;
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .tag .hole {
+        position: absolute;
+        top: calc(2.4 * var(--u));
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(2.4 * var(--u));
+        height: calc(2.4 * var(--u));
+        border-radius: 50%;
+        background: #B9AE9C;
+      }
+
+      .shadow {
+        position: absolute;
+        left: 0;
+        transform: translateX(-50%);
+        height: calc(16 * var(--u));
+        background: radial-gradient(closest-side, rgba(70, 52, 34, .13), transparent);
+        pointer-events: none;
+      }
+
+      .hit {
+        position: absolute;
+        top: 0;
+        background: transparent;
+        border: 0;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        pointer-events: auto;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .rail-zone.dragging .hit {
+        cursor: grabbing;
+      }
+
+      /* Footer */
+      .foot-left {
+        position: absolute;
+        left: calc(47 * var(--u));
+        bottom: calc(58 * var(--u));
+        width: calc(420 * var(--u));
+        height: calc(40 * var(--u));
+        z-index: 5;
+        pointer-events: none;
+      }
+
+      .hint {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        align-items: center;
+        gap: calc(13 * var(--u));
+        font-size: calc(14.6 * var(--u));
+        color: #776D63;
+        white-space: nowrap;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .hint-rule {
+        width: calc(27 * var(--u));
+        height: max(1px, calc(1 * var(--u)));
+        background: #8E857A;
+        flex-shrink: 0;
+      }
+
+      .hov-label {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(calc(-50% + 6 * var(--u)));
+        opacity: 0;
+        font-size: calc(13 * var(--u));
+        line-height: 1.35;
+        color: var(--ink);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
+
+      .hov-label-name {
+        font-weight: 600;
+      }
+
+      .hov-label-price {
+        font-weight: 400;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .stage.has-hov .hint {
+        opacity: 0;
+        transform: translateY(calc(-50% - 6 * var(--u)));
+      }
+
+      .stage.has-hov .hov-label {
+        opacity: 1;
+        transform: translateY(-50%);
+      }
+
+      .prog {
+        position: absolute;
+        left: 50%;
+        translate: -50% 0;
+        bottom: calc(64 * var(--u));
+        width: calc(140 * var(--u));
+        height: calc(2 * var(--u));
+        background: #DCD4C8;
+        z-index: 5;
+        pointer-events: none;
+      }
+
+      .prog-thumb {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 58%;
+        height: 100%;
+        background: var(--ink);
+      }
+
+      .foot-right {
+        position: absolute;
+        right: calc(48 * var(--u));
+        bottom: calc(46 * var(--u));
+        text-align: right;
+        z-index: 5;
+      }
+
+      .foot-copy {
+        margin: 0;
+        font-weight: 600;
+        font-size: calc(15.6 * var(--u));
+        line-height: 1.24;
+        letter-spacing: -0.005em;
+        color: var(--ink);
+      }
+
+      .foot-link {
+        display: inline-flex;
+        align-items: center;
+        gap: calc(9 * var(--u));
+        margin-top: calc(14 * var(--u));
+        font-weight: 500;
+        font-size: calc(13.4 * var(--u));
+        color: var(--ink);
+        text-decoration: none;
+        border-bottom: 1px solid var(--ink);
+        padding-bottom: calc(5 * var(--u));
+        line-height: 1;
+        transition: opacity 0.2s ease;
+      }
+
+      .foot-link:hover {
+        opacity: 0.65;
+      }
+
+      .foot-link svg {
+        width: calc(15 * var(--u));
+        height: calc(10 * var(--u));
+        display: block;
+      }
+
+      /* Quick-view */
+      .qv {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        pointer-events: none;
+        opacity: 0;
+      }
+
+      .qv.open {
+        pointer-events: auto;
+        opacity: 1;
+      }
+
+      .qv.closing {
+        pointer-events: none;
+        opacity: 1;
+      }
+
+      .qv.closing .qv-close,
+      .qv.closing .qv-rod,
+      .qv.closing .qv-info {
+        opacity: 0;
+        transition: opacity 0.18s ease 0s;
+      }
+
+      .qv-close {
+        position: absolute;
+        right: calc(28 * var(--u));
+        top: calc(22 * var(--u));
+        height: calc(32 * var(--u));
+        padding: 0 calc(14 * var(--u));
+        border: 1.5px solid var(--ink);
+        background: var(--bg);
+        color: var(--ink);
+        font-weight: 500;
+        font-size: calc(14 * var(--u));
+        line-height: 1;
+        border-radius: 999px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: calc(6 * var(--u));
+        z-index: 5;
+        opacity: 0;
+        transition: opacity 0.25s ease 0.15s, background-color 0.2s ease, color 0.2s ease;
+      }
+
+      .qv.open .qv-close {
+        opacity: 1;
+      }
+
+      .qv-close:hover {
+        background: var(--ink);
+        color: var(--bg);
+      }
+
+      .qv-rod {
+        position: absolute;
+        left: calc(440 * var(--u));
+        top: 0;
+        width: 1.5px;
+        height: calc(62 * var(--u));
+        background: #3B3631;
+        transform: translateX(-50%);
+        opacity: 0;
+        pointer-events: none;
+        z-index: 2;
+      }
+
+      .qv.open .qv-rod {
+        opacity: 1;
+        transition: opacity 0.25s ease 0.45s;
+      }
+
+      .qv-img {
+        position: absolute;
+        left: calc(440 * var(--u));
+        top: calc(62 * var(--u));
+        width: 0;
+        height: 0;
+        transform-origin: 0 0;
+        pointer-events: none;
+        z-index: 3;
+      }
+
+      .qv-face {
+        position: absolute;
+        top: 0;
+        background-repeat: no-repeat;
+        transition: opacity 0.25s ease;
+      }
+
+      .qv-face.front {
+        opacity: 1;
+      }
+
+      .qv-face.back {
+        opacity: 0;
+      }
+
+      .qv-img.show-back .qv-face.front {
+        opacity: 0;
+      }
+
+      .qv-img.show-back .qv-face.back {
+        opacity: 1;
+      }
+
+      .qv-info {
+        position: absolute;
+        left: calc(972 * var(--u));
+        width: calc(430 * var(--u));
+        top: 50%;
+        transform: translateY(-42%);
+        z-index: 4;
+      }
+
+      .qv-stagger {
+        opacity: 0;
+        transform: translateY(calc(10 * var(--u)));
+      }
+
+      .qv.open .qv-stagger {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.42s cubic-bezier(.22, 1, .36, 1), transform 0.42s cubic-bezier(.22, 1, .36, 1);
+      }
+
+      .qv.open .qv-s0 { transition-delay: 0.28s; }
+      .qv.open .qv-s1 { transition-delay: 0.325s; }
+      .qv.open .qv-s2 { transition-delay: 0.37s; }
+      .qv.open .qv-s3 { transition-delay: 0.415s; }
+      .qv.open .qv-s4 { transition-delay: 0.46s; }
+      .qv.open .qv-s5 { transition-delay: 0.505s; }
+      .qv.open .qv-s6 { transition-delay: 0.55s; }
+      .qv.open .qv-s7 { transition-delay: 0.595s; }
+
+      .qv-counter {
+        font-size: calc(12 * var(--u));
+        letter-spacing: 0.12em;
+        color: #8A7F72;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .qv-name {
+        margin: calc(10 * var(--u)) 0 0;
+        font-weight: 600;
+        font-size: calc(23 * var(--u));
+        letter-spacing: -0.01em;
+        line-height: 1.2;
+        color: var(--ink);
+      }
+
+      .qv-price {
+        margin: calc(8 * var(--u)) 0 0;
+        font-weight: 600;
+        font-size: calc(15.5 * var(--u));
+        color: var(--ink);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .qv-tabs {
+        display: flex;
+        align-items: center;
+        gap: calc(32 * var(--u));
+        margin-top: calc(26 * var(--u));
+      }
+
+      .qv-tab {
+        border: 0;
+        background: transparent;
+        padding: 0 0 calc(6 * var(--u));
+        font-size: calc(15 * var(--u));
+        font-weight: 500;
+        color: #8A7F72;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+        transition: color 0.2s ease, border-color 0.2s ease;
+      }
+
+      .qv-tab.active {
+        color: var(--ink);
+        border-bottom-color: var(--ink);
+      }
+
+      .qv-size-lbl {
+        margin-top: calc(28 * var(--u));
+        font-size: calc(11 * var(--u));
+        letter-spacing: 0.14em;
+        color: var(--muted);
+        font-weight: 500;
+      }
+
+      .qv-sizes {
+        display: flex;
+        align-items: center;
+        gap: calc(10 * var(--u));
+        margin-top: calc(10 * var(--u));
+      }
+
+      .qv-size {
+        width: calc(52 * var(--u));
+        height: calc(44 * var(--u));
+        border-radius: 999px;
+        border: 1.5px solid var(--line);
+        background: transparent;
+        font-weight: 500;
+        font-size: calc(14 * var(--u));
+        color: var(--ink);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      }
+
+      .qv-size:hover:not(.active) {
+        border-color: #9A8F82;
+      }
+
+      .qv-size.active {
+        background: var(--btn);
+        border-color: var(--btn);
+        color: #fff;
+      }
+
+      .qv-add {
+        margin-top: calc(24 * var(--u));
+        width: 100%;
+        height: calc(58 * var(--u));
+        border-radius: 999px;
+        border: 0;
+        background: var(--btn);
+        color: #fff;
+        font-weight: 600;
+        font-size: calc(16 * var(--u));
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: calc(10 * var(--u));
+        transition: background-color 0.2s ease;
+      }
+
+      .qv-add.adding {
+        background: #8D8780;
+        cursor: default;
+      }
+
+      .qv-spinner {
+        width: calc(16 * var(--u));
+        height: calc(16 * var(--u));
+        border: calc(2 * var(--u)) solid rgba(255, 255, 255, 0.35);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: qv-spin 0.7s linear infinite;
+        display: none;
+      }
+
+      .qv-add.adding .qv-spinner {
+        display: block;
+      }
+
+      @keyframes qv-spin {
+        to { transform: rotate(360deg); }
+      }
+
+      .qv-meta {
+        margin-top: calc(22 * var(--u));
+        padding-top: calc(16 * var(--u));
+        border-top: 1px solid var(--line);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: calc(13.5 * var(--u));
+        color: var(--ink);
+      }
+
+      .qv-meta-link {
+        color: var(--ink);
+        text-decoration: underline;
+        text-underline-offset: calc(3 * var(--u));
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        padding: 0;
+        font: inherit;
+      }
+
+      /* Cart drawer */
+      .drawer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: calc(560 * var(--u));
+        background: #FDFBF7;
+        border-left: 1px solid var(--line);
+        z-index: 30;
+        transform: translateX(100%);
+        transition: transform 0.6s cubic-bezier(.22, 1, .36, 1);
+        display: flex;
+        flex-direction: column;
+        padding: calc(32 * var(--u)) calc(36 * var(--u));
+      }
+
+      body.cart-open .drawer {
+        transform: translateX(0);
+      }
+
+      .drawer-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: calc(22 * var(--u));
+        border-bottom: 1px solid #ECE6DC;
+        flex-shrink: 0;
+      }
+
+      .drawer-title-wrap {
+        display: flex;
+        align-items: center;
+        gap: calc(12 * var(--u));
+      }
+
+      .drawer-title {
+        margin: 0;
+        font-weight: 700;
+        font-size: calc(27 * var(--u));
+        letter-spacing: -0.02em;
+        line-height: 1;
+        color: var(--ink);
+      }
+
+      .drawer-chip {
+        width: calc(24 * var(--u));
+        height: calc(24 * var(--u));
+        border-radius: 50%;
+        background: #E9E3DA;
+        font-weight: 600;
+        font-size: calc(12.5 * var(--u));
+        color: var(--ink);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .drawer-close {
+        width: calc(40 * var(--u));
+        height: calc(40 * var(--u));
+        border-radius: 50%;
+        background: #EFEAE2;
+        border: 0;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--ink);
+        transition: background-color 0.2s ease;
+      }
+
+      .drawer-close:hover {
+        background: #E5DED3;
+      }
+
+      .drawer-close svg {
+        width: calc(16 * var(--u));
+        height: calc(16 * var(--u));
+      }
+
+      .drawer-list {
+        flex: 1;
+        overflow-y: auto;
+        min-height: 0;
+      }
+
+      .drawer-empty {
+        padding: calc(48 * var(--u)) 0;
+        text-align: center;
+        font-size: calc(15 * var(--u));
+        color: #8A7F72;
+      }
+
+      .cart-row {
+        display: grid;
+        grid-template-columns: calc(76 * var(--u)) 1fr auto;
+        gap: calc(18 * var(--u));
+        padding: calc(16 * var(--u)) 0 calc(18 * var(--u));
+        border-bottom: 1px solid #ECE6DC;
+        align-items: start;
+      }
+
+      .cart-row.is-new {
+        animation: cart-row-in 0.6s cubic-bezier(.22, 1, .36, 1) both;
+      }
+
+      @keyframes cart-row-in {
+        from {
+          opacity: 0;
+          transform: translateX(calc(30 * var(--u)));
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .cart-thumb {
+        width: calc(76 * var(--u));
+        height: calc(96 * var(--u));
+        background: #F4EFE7;
+        border-radius: calc(2 * var(--u));
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cart-thumb-crop {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-repeat: no-repeat;
+      }
+
+      .cart-info {
+        min-width: 0;
+      }
+
+      .cart-name {
+        font-weight: 500;
+        font-size: calc(17 * var(--u));
+        line-height: 1.25;
+        color: var(--ink);
+      }
+
+      .cart-meta {
+        margin-top: calc(4 * var(--u));
+        font-size: calc(14 * var(--u));
+        line-height: 1.5;
+        color: #6F665C;
+      }
+
+      .cart-controls {
+        margin-top: calc(14 * var(--u));
+        display: flex;
+        align-items: center;
+        gap: calc(12 * var(--u));
+      }
+
+      .stepper {
+        height: calc(40 * var(--u));
+        border: 1px solid #DCD4C8;
+        border-radius: calc(4 * var(--u));
+        display: inline-flex;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .stepper button {
+        width: calc(34 * var(--u));
+        height: 100%;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        font-size: calc(16 * var(--u));
+        color: var(--ink);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.15s ease;
+      }
+
+      .stepper button:hover {
+        background: #F2ECE3;
+      }
+
+      .stepper-val {
+        min-width: calc(28 * var(--u));
+        text-align: center;
+        font-size: calc(14 * var(--u));
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .trash-btn {
+        width: calc(36 * var(--u));
+        height: calc(40 * var(--u));
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        color: #8A7F72;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: color 0.15s ease;
+      }
+
+      .trash-btn:hover {
+        color: var(--ink);
+      }
+
+      .trash-btn svg {
+        width: calc(16 * var(--u));
+        height: calc(16 * var(--u));
+      }
+
+      .cart-line-total {
+        font-weight: 600;
+        font-size: calc(16 * var(--u));
+        color: var(--ink);
+        font-variant-numeric: tabular-nums;
+        padding-top: calc(2 * var(--u));
+      }
+
+      .drawer-foot {
+        padding-top: calc(20 * var(--u));
+        border-top: 1px solid #ECE6DC;
+        flex-shrink: 0;
+      }
+
+      .drawer-total-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+      }
+
+      .drawer-total-lbl {
+        font-weight: 600;
+        font-size: calc(16 * var(--u));
+        color: var(--ink);
+      }
+
+      .drawer-total-val {
+        font-weight: 600;
+        font-size: calc(18 * var(--u));
+        color: var(--ink);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .drawer-note {
+        margin: calc(6 * var(--u)) 0 0;
+        font-size: calc(12.5 * var(--u));
+        color: #8A7F72;
+      }
+
+      .checkout-btn {
+        margin-top: calc(18 * var(--u));
+        width: 100%;
+        height: calc(52 * var(--u));
+        border-radius: calc(3 * var(--u));
+        border: 0;
+        background: var(--btn);
+        color: #fff;
+        font-weight: 600;
+        font-size: calc(15 * var(--u));
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+      }
+
+      .checkout-btn:hover {
+        opacity: 0.88;
+      }
+
+      .checkout-btn:disabled {
+        opacity: 0.4;
+        cursor: default;
+      }
+
+      /* Phone and tablet (width <= 820) */
+      @media (max-width: 820px) {
+        .util-bar,
+        .nav-links,
+        .search-pill,
+        .account-btn {
+          display: none;
+        }
+
+        .nav-row {
+          top: 0;
+          height: calc(70 * var(--u));
+        }
+
+        .wordmark {
+          left: calc(20 * var(--u));
+          top: calc(26 * var(--u));
+          font-size: calc(20 * var(--u));
+        }
+
+        .nav-tools {
+          right: calc(30 * var(--u));
+          top: calc(24 * var(--u));
+        }
+
+        .bag-btn {
+          margin-left: 0;
+        }
+
+        .eyebrow {
+          top: calc(104 * var(--u));
+          gap: calc(10 * var(--u));
+        }
+
+        .eyebrow-left,
+        .eyebrow-right {
+          font-size: calc(9.5 * var(--u));
+        }
+
+        .eyebrow-div {
+          height: calc(10 * var(--u));
+        }
+
+        .headline {
+          top: calc(130 * var(--u));
+          font-size: calc(40 * var(--u));
+          width: calc(330 * var(--u));
+          white-space: normal;
+          text-align: center;
+          line-height: 1.08;
+        }
+
+        .rail-zone {
+          top: calc(260 * var(--u));
+          bottom: calc(150 * var(--u));
+        }
+
+        .foot-left {
+          left: calc(20 * var(--u));
+          bottom: calc(150 * var(--u));
+          width: calc(350 * var(--u));
+          height: calc(34 * var(--u));
+        }
+
+        .hint {
+          font-size: calc(12.5 * var(--u));
+          gap: calc(10 * var(--u));
+        }
+
+        .hint-rule {
+          width: calc(20 * var(--u));
+        }
+
+        .hov-label {
+          font-size: calc(12 * var(--u));
+        }
+
+        .prog {
+          bottom: calc(128 * var(--u));
+          width: calc(110 * var(--u));
+        }
+
+        .foot-right {
+          right: calc(20 * var(--u));
+          bottom: calc(30 * var(--u));
+        }
+
+        .foot-copy {
+          font-size: calc(13 * var(--u));
+        }
+
+        .foot-link {
+          margin-top: calc(10 * var(--u));
+          font-size: calc(12 * var(--u));
+          gap: calc(7 * var(--u));
+          padding-bottom: calc(4 * var(--u));
+        }
+
+        .foot-link svg {
+          width: calc(13 * var(--u));
+          height: calc(9 * var(--u));
+        }
+
+        /* Quick-view mobile */
+        .qv-close {
+          right: calc(18 * var(--u));
+          top: calc(18 * var(--u));
+        }
+
+        .qv-rod {
+          left: 50%;
+          height: calc(64 * var(--u));
+        }
+
+        .qv-img {
+          left: 50%;
+          top: calc(64 * var(--u));
+        }
+
+        .qv-info {
+          left: calc(20 * var(--u));
+          bottom: calc(24 * var(--u));
+          top: auto;
+          width: calc(350 * var(--u));
+          transform: none;
+          padding: calc(14 * var(--u)) calc(14 * var(--u)) calc(12 * var(--u));
+          border-radius: calc(6 * var(--u));
+        }
+
+        .qv.open .qv-info {
+          background: rgba(250, 247, 242, 0.94);
+        }
+
+        .qv-name {
+          margin-top: calc(6 * var(--u));
+          font-size: calc(20 * var(--u));
+        }
+
+        .qv-price {
+          margin-top: calc(4 * var(--u));
+          font-size: calc(14 * var(--u));
+        }
+
+        .qv-tabs {
+          margin-top: calc(14 * var(--u));
+          gap: calc(24 * var(--u));
+        }
+
+        .qv-tab {
+          font-size: calc(13.5 * var(--u));
+          padding-bottom: calc(4 * var(--u));
+        }
+
+        .qv-size-lbl {
+          margin-top: calc(14 * var(--u));
+          font-size: calc(10 * var(--u));
+        }
+
+        .qv-sizes {
+          margin-top: calc(8 * var(--u));
+          gap: calc(8 * var(--u));
+        }
+
+        .qv-size {
+          width: calc(48 * var(--u));
+          height: calc(38 * var(--u));
+          font-size: calc(13 * var(--u));
+        }
+
+        .qv-add {
+          margin-top: calc(14 * var(--u));
+          height: calc(48 * var(--u));
+          font-size: calc(14.5 * var(--u));
+        }
+
+        .qv-meta {
+          margin-top: calc(12 * var(--u));
+          padding-top: calc(10 * var(--u));
+          font-size: calc(12 * var(--u));
+        }
+
+        /* Drawer mobile */
+        body.cart-open .page {
+          right: 0;
+        }
+
+        .drawer {
+          width: 100%;
+          border-left: 0;
+          padding: calc(24 * var(--u)) calc(20 * var(--u));
+        }
+      }
+
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          transition-duration: 0s !important;
+          transition-delay: 0s !important;
+          animation-duration: 0s !important;
+          animation-delay: 0s !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page" id="page">
+      <main class="stage" id="stage">
+        <div class="util-bar" aria-label="Utility navigation">
+          <a href="#ateliers">Our Ateliers</a>
+          <a href="#care">Care</a>
+          <a href="#journal">Journal</a>
+          <a href="#sign-in">Sign In</a>
+        </div>
+
+        <header class="nav-row">
+          <a href="#top" class="wordmark">MAISON VERREL</a>
+
+          <nav class="nav-links" aria-label="Primary navigation">
+            <a href="#home">Home</a>
+            <a href="#atelier">Atelier</a>
+            <a href="#rail" id="navRailLink">The Rail</a>
+            <a href="#contact">Contact</a>
+          </nav>
+
+          <div class="nav-tools">
+            <label class="search-pill" id="searchPill">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="10.5" cy="10.5" r="7" stroke="#2A2420" stroke-width="1.7" />
+                <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="#2A2420" stroke-width="1.7" stroke-linecap="round" />
+              </svg>
+              <input
+                type="text"
+                class="search-input"
+                id="searchInput"
+                placeholder="Search"
+                aria-label="Search garments"
+                autocomplete="off"
+              />
+            </label>
+
+            <button class="icon-btn account-btn" type="button" aria-label="Account">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="8" r="4" stroke="#1A1716" stroke-width="1.6" />
+                <path d="M4.5 20.5c.8-4 4-6 7.5-6s6.7 2 7.5 6" stroke="#1A1716" stroke-width="1.6" stroke-linecap="round" />
+              </svg>
+            </button>
+
+            <button class="icon-btn bag-btn" id="bagBtn" type="button" aria-label="Open cart, 3 items">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5.5 8.5h13l1.2 12H4.3l1.2-12Z" stroke="#1A1716" stroke-width="1.6" stroke-linejoin="round" />
+                <path d="M8.5 8.5V7a3.5 3.5 0 0 1 7 0v1.5" stroke="#1A1716" stroke-width="1.6" stroke-linecap="round" />
+              </svg>
+              <span class="bag-badge" id="bagBadge">3</span>
+            </button>
+          </div>
+        </header>
+
+        <div class="eyebrow">
+          <span class="eyebrow-left">NEW COLLECTION</span>
+          <span class="eyebrow-div" aria-hidden="true"></span>
+          <span class="eyebrow-right">EVENING &amp; TAILORING</span>
+        </div>
+
+        <h1 class="headline" id="headline">
+          <span class="headline-word hw-0">Silhouettes</span><span class="headline-word hw-1">that</span><span class="headline-word hw-2">hang</span><span class="headline-word hw-3">right.</span>
+        </h1>
+
+        <section class="rail-zone" id="railZone" aria-label="Collection garment rail">
+          <svg class="rail-svg" id="railSvg" aria-hidden="true">
+            <defs>
+              <linearGradient id="railGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#E9DCBC" />
+                <stop offset="45%" stop-color="#C2A877" />
+                <stop offset="100%" stop-color="#7F6743" />
+              </linearGradient>
+            </defs>
+            <path id="railShadow" fill="none" stroke="rgba(80,60,35,.12)" stroke-linecap="butt" />
+            <path id="railTube" fill="none" stroke="url(#railGrad)" stroke-linecap="butt" />
+            <path id="railHi" fill="none" stroke="rgba(255,247,226,.85)" stroke-linecap="butt" />
+          </svg>
+          <div class="garments" id="garments"></div>
+        </section>
+
+        <div class="foot-left" id="footLeft">
+          <div class="hint" id="hint">
+            <span class="hint-rule" aria-hidden="true"></span>
+            <span id="hintText">Hover a piece · click to look closer</span>
+          </div>
+          <div class="hov-label" id="hovLabel" aria-live="polite">
+            <div class="hov-label-name" id="hovName"></div>
+            <div class="hov-label-price">$690.00</div>
+          </div>
+        </div>
+
+        <div class="prog" id="prog" aria-hidden="true">
+          <div class="prog-thumb" id="progThumb"></div>
+        </div>
+
+        <div class="foot-right" id="footRight">
+          <p class="foot-copy">Cut from Italian silk and wool.<br />Tailored to order. Made to last.</p>
+          <a href="#collection" class="foot-link" id="shopLink">
+            <span>Shop the Collection</span>
+            <svg viewBox="0 0 15 10" fill="none" aria-hidden="true">
+              <path d="M1 5h12M9.5 1.5L13.5 5l-4 3.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+      </main>
+
+      <section class="qv" id="qv" aria-hidden="true" aria-label="Garment quick-view">
+        <button class="qv-close" id="qvClose" type="button">Close <span aria-hidden="true">×</span></button>
+        <div class="qv-rod" id="qvRod" aria-hidden="true"></div>
+        <div class="qv-img" id="qvImg">
+          <div class="qv-face front" id="qvFront"></div>
+          <div class="qv-face back" id="qvBack"></div>
+        </div>
+        <div class="qv-info" id="qvInfo">
+          <div class="qv-stagger qv-s0 qv-counter" id="qvCounter">1 / 20</div>
+          <h2 class="qv-stagger qv-s1 qv-name" id="qvName">Noir Tailored Blazer</h2>
+          <div class="qv-stagger qv-s2 qv-price">$690.00</div>
+          <div class="qv-stagger qv-s3 qv-tabs" role="tablist" aria-label="Garment view">
+            <button class="qv-tab active" id="tabFront" type="button" role="tab" aria-selected="true">Front</button>
+            <button class="qv-tab" id="tabBack" type="button" role="tab" aria-selected="false">Back</button>
+          </div>
+          <div class="qv-stagger qv-s4 qv-size-lbl">SIZE</div>
+          <div class="qv-stagger qv-s5 qv-sizes" role="radiogroup" aria-label="Select size">
+            <button class="qv-size active" type="button" data-size="S" aria-checked="true">S</button>
+            <button class="qv-size" type="button" data-size="M" aria-checked="false">M</button>
+            <button class="qv-size" type="button" data-size="L" aria-checked="false">L</button>
+            <button class="qv-size" type="button" data-size="XL" aria-checked="false">XL</button>
+          </div>
+          <button class="qv-stagger qv-s6 qv-add" id="qvAdd" type="button">
+            <span class="qv-spinner" aria-hidden="true"></span>
+            <span id="qvAddText">Add to cart</span>
+          </button>
+          <div class="qv-stagger qv-s7 qv-meta">
+            <span id="qvMetaName">Noir Tailored Blazer</span>
+            <button class="qv-meta-link" id="qvProductLink" type="button">View product page</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Shopping cart">
+      <div class="drawer-head">
+        <div class="drawer-title-wrap">
+          <h2 class="drawer-title">Cart</h2>
+          <span class="drawer-chip" id="drawerChip">3</span>
+        </div>
+        <button class="drawer-close" id="drawerClose" type="button" aria-label="Close cart">
+          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="drawer-list" id="drawerList"></div>
+
+      <div class="drawer-foot">
+        <div class="drawer-total-row">
+          <span class="drawer-total-lbl">Estimated total</span>
+          <span class="drawer-total-val" id="drawerTotal">$2,070.00</span>
+        </div>
+        <p class="drawer-note" id="drawerNote">Taxes and shipping calculated at checkout.</p>
+        <button class="checkout-btn" id="checkoutBtn" type="button">Checkout</button>
+      </div>
+    </aside>
+
+    <script>
+      (() => {
+        "use strict";
+
+        const proxyUrl = (raw) =>
+          "https://images.higgs.ai/?default=1&output=webp&url=" +
+          encodeURIComponent(raw) +
+          "&w=1360&q=85";
+
+        const SHEETS = {
+          side: proxyUrl("https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261113_115504_3ab92758-5854-4a1c-85db-ff8efd929e86.png"),
+          front: proxyUrl("https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261113_115743_54dc8c72-0be0-4858-bd0c-10ecb399c16c.png"),
+          back: proxyUrl("https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261113_115613_7d45aea6-1bea-41ff-b878-72d7c8bcb9da.png"),
+        };
+
+        const NAMES = [
+          "Noir Tailored Blazer",
+          "Ivory Belted Trench",
+          "Oxblood Silk Slip",
+          "Taupe Wool Blazer",
+          "Champagne Bias Slip",
+          "Pearl Silk Slip",
+          "Taupe Belted Trench",
+          "Oxblood Satin Gown",
+        ];
+
+        const CROPS = {
+          side: [
+            [44, 619, 185],
+            [45, 860, 514],
+            [45, 876, 834],
+            [45, 606, 1169],
+            [1024, 937, 177],
+            [1024, 936, 511],
+            [1024, 907, 825],
+            [1024, 962, 1166],
+          ],
+          front: [
+            [79, 552, 175],
+            [76, 900, 511],
+            [76, 913, 848],
+            [80, 550, 1179],
+            [1024, 936, 177],
+            [1024, 940, 513],
+            [1024, 894, 851],
+            [1024, 938, 1185],
+          ],
+          back: [
+            [76, 515, 176],
+            [60, 890, 508],
+            [60, 901, 845],
+            [76, 520, 1180],
+            [1026, 931, 175],
+            [1026, 929, 508],
+            [1024, 901, 845],
+            [1024, 934, 1184],
+          ],
+        };
+
+        const ORDER = [0, 1, 2, 3, 4, 0, 5, 6, 7, 0, 4, 1, 2, 3, 5, 6, 7, 1, 4, 3];
+        const TAG_ROTS = [-5, 4, -3, 6, -4, 3, -6, 4, -3, 5];
+        const PUSH_TABLE = [0, 50, 24, 9, 0];
+        const PRICE = 690;
+
+        const sheetLoaded = { side: false, front: false, back: false };
+        const sheetPromises = {};
+
+        function preloadSheet(key) {
+          return new Promise((resolve) => {
+            const img = new Image();
+            img.referrerPolicy = "no-referrer";
+            const done = () => {
+              sheetLoaded[key] = true;
+              resolve();
+            };
+            img.onload = () => {
+              if (typeof img.decode === "function") {
+                img.decode().then(done, done);
+              } else {
+                done();
+              }
+            };
+            img.onerror = done;
+            img.src = SHEETS[key];
+          });
+        }
+
+        sheetPromises.side = preloadSheet("side");
+        sheetPromises.front = preloadSheet("front");
+        sheetPromises.back = preloadSheet("back");
+
+        // DOM references
+        const rootEl = document.documentElement;
+        const pageEl = document.getElementById("page");
+        const stageEl = document.getElementById("stage");
+        const railZoneEl = document.getElementById("railZone");
+        const railSvgEl = document.getElementById("railSvg");
+        const railShadowEl = document.getElementById("railShadow");
+        const railTubeEl = document.getElementById("railTube");
+        const railHiEl = document.getElementById("railHi");
+        const garmentsEl = document.getElementById("garments");
+        const hintTextEl = document.getElementById("hintText");
+        const hovNameEl = document.getElementById("hovName");
+        const progThumbEl = document.getElementById("progThumb");
+        const footLeftEl = document.getElementById("footLeft");
+        const progEl = document.getElementById("prog");
+        const footRightEl = document.getElementById("footRight");
+        const headlineEl = document.getElementById("headline");
+        const bagBtnEl = document.getElementById("bagBtn");
+        const bagBadgeEl = document.getElementById("bagBadge");
+        const searchInputEl = document.getElementById("searchInput");
+        const searchPillEl = document.getElementById("searchPill");
+        const navRailLinkEl = document.getElementById("navRailLink");
+        const shopLinkEl = document.getElementById("shopLink");
+
+        // Quick-view refs
+        const qvEl = document.getElementById("qv");
+        const qvCloseEl = document.getElementById("qvClose");
+        const qvRodEl = document.getElementById("qvRod");
+        const qvImgEl = document.getElementById("qvImg");
+        const qvFrontEl = document.getElementById("qvFront");
+        const qvBackEl = document.getElementById("qvBack");
+        const qvInfoEl = document.getElementById("qvInfo");
+        const qvCounterEl = document.getElementById("qvCounter");
+        const qvNameEl = document.getElementById("qvName");
+        const qvMetaNameEl = document.getElementById("qvMetaName");
+        const qvProductLinkEl = document.getElementById("qvProductLink");
+        const tabFrontEl = document.getElementById("tabFront");
+        const tabBackEl = document.getElementById("tabBack");
+        const qvAddEl = document.getElementById("qvAdd");
+        const qvAddTextEl = document.getElementById("qvAddText");
+        const sizeButtons = Array.from(document.querySelectorAll(".qv-size"));
+
+        // Drawer refs
+        const drawerEl = document.getElementById("drawer");
+        const drawerCloseEl = document.getElementById("drawerClose");
+        const drawerChipEl = document.getElementById("drawerChip");
+        const drawerListEl = document.getElementById("drawerList");
+        const drawerTotalEl = document.getElementById("drawerTotal");
+        const drawerNoteEl = document.getElementById("drawerNote");
+        const checkoutBtnEl = document.getElementById("checkoutBtn");
+
+        const reducedQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const touchQuery = window.matchMedia("(hover: none)");
+        let reducedMotion = reducedQuery.matches;
+        let isTouchPrimary = touchQuery.matches;
+
+        function updateHintText() {
+          hintTextEl.textContent = isTouchPrimary
+            ? "Tap a piece · tap again to look closer"
+            : "Hover a piece · click to look closer";
+        }
+        updateHintText();
+
+        reducedQuery.addEventListener("change", (e) => {
+          reducedMotion = e.matches;
+          if (reducedMotion) {
+            for (let i = 0; i < pieces.length; i++) {
+              pieces[i].a = 0;
+              pieces[i].av = 0;
+              pieces[i].sway.style.transform = "rotate(0deg)";
+            }
+          }
+        });
+        touchQuery.addEventListener("change", (e) => {
+          isTouchPrimary = e.matches;
+          updateHintText();
+        });
+
+        // Prevent anchor jumps
+        document.querySelectorAll('a[href^="#"]').forEach((a) => {
+          a.addEventListener("click", (e) => {
+            e.preventDefault();
+          });
+        });
+
+        // Layout metrics
+        let u = 1;
+        let pageW = 1440;
+        let zoneTop = 230;
+        let railTop = 270;
+        let railSag = 74;
+        let gap = 121;
+        let gs = 0.455;
+        let start = 113;
+        let maxScroll = 0;
+        let lastDrawnW = -1;
+
+        // Scroll & inertia state
+        let target = 0;
+        let cur = 0;
+        let vel = 0;
+        let hoveredIdx = -1;
+        let isDragging = false;
+        let isAddingToCart = false;
+        let qvOpenIdx = -1;
+        let qvToken = 0;
+        let qvAnim = null;
+        let qvView = "front";
+        let qvSize = "S";
+        let qvScale = 0.9;
+        let cartOpen = false;
+        let introStarted = false;
+
+        // Cart state
+        let nextCartId = 1;
+        const cart = [
+          { id: nextCartId++, k: 3, size: "M", qty: 1, isNew: false },
+          { id: nextCartId++, k: 4, size: "S", qty: 1, isNew: false },
+          { id: nextCartId++, k: 1, size: "M", qty: 1, isNew: false },
+        ];
+
+        const fmtCurrency = (n) =>
+          "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+        function applyCrop(el, sheetKey, k, scale) {
+          const [y, h, hookX] = CROPS[sheetKey][k];
+          el.style.width = `${340 * scale}px`;
+          el.style.height = `${(h + 6) * scale}px`;
+          el.style.left = `${-170 * scale}px`;
+          el.style.top = "0px";
+          el.style.backgroundImage = `url("${SHEETS[sheetKey]}")`;
+          el.style.backgroundSize = `${1360 * scale}px auto`;
+          el.style.backgroundPosition = `${-(hookX - 170) * scale}px ${-y * scale}px`;
+          el.style.backgroundRepeat = "no-repeat";
+        }
+
+        // Build 20 garments on the rail
+        const pieces = ORDER.map((k, i) => {
+          const g = document.createElement("div");
+          g.className = "g";
+          g.dataset.i = String(i);
+
+          const drop = document.createElement("div");
+          drop.className = "drop";
+
+          const sway = document.createElement("div");
+          sway.className = "sway";
+
+          const lift = document.createElement("div");
+          lift.className = "lift";
+
+          const side = document.createElement("div");
+          side.className = "face side";
+
+          const front = document.createElement("div");
+          front.className = "face front";
+
+          const tag = document.createElement("div");
+          tag.className = "tag";
+          tag.style.transform = `rotate(${TAG_ROTS[i % TAG_ROTS.length]}deg)`;
+          const hole = document.createElement("span");
+          hole.className = "hole";
+          tag.appendChild(hole);
+          tag.appendChild(document.createTextNode("$690"));
+
+          lift.appendChild(side);
+          lift.appendChild(front);
+          lift.appendChild(tag);
+          sway.appendChild(lift);
+          drop.appendChild(sway);
+
+          const shadow = document.createElement("div");
+          shadow.className = "shadow";
+
+          const hit = document.createElement("button");
+          hit.className = "hit";
+          hit.type = "button";
+          hit.setAttribute("aria-label", `${NAMES[k]}, $690`);
+
+          g.appendChild(drop);
+          g.appendChild(shadow);
+          g.appendChild(hit);
+          garmentsEl.appendChild(g);
+
+          return {
+            i,
+            k,
+            g,
+            drop,
+            sway,
+            lift,
+            side,
+            front,
+            shadow,
+            hit,
+            offset: 0,
+            a: 0,
+            av: 0,
+          };
+        });
+
+        function railY(x, W) {
+          if (W <= 0) return railTop * u;
+          const half = W * 0.5;
+          const t = (x - half) / half;
+          return (railTop + railSag * (1 - t * t)) * u;
+        }
+
+        function drawRail(W) {
+          const y0 = railY(0, W) - zoneTop;
+          const yMid = railY(W * 0.5, W) - zoneTop;
+          const yc = 2 * yMid - y0;
+          const midX = W * 0.5;
+
+          const makePath = (dy) => `M0 ${(y0 + dy).toFixed(2)} Q ${midX.toFixed(2)} ${(yc + dy).toFixed(2)} ${W.toFixed(2)} ${(y0 + dy).toFixed(2)}`;
+
+          railShadowEl.setAttribute("d", makePath(4 * u));
+          railShadowEl.setAttribute("stroke-width", (3 * u).toFixed(2));
+
+          railTubeEl.setAttribute("d", makePath(0));
+          railTubeEl.setAttribute("stroke-width", (5.2 * u).toFixed(2));
+
+          railHiEl.setAttribute("d", makePath(-1.3 * u));
+          railHiEl.setAttribute("stroke-width", (1.1 * u).toFixed(2));
+        }
+
+        function layoutMetrics() {
+          const vw = window.innerWidth;
+          const vh = window.innerHeight;
+          if (vw <= 0 || vh <= 0) return false;
+
+          u = vw > 820 ? Math.min(vw / 1440, vh / 900) : Math.min(vw / 390, vh / 780);
+          rootEl.style.setProperty("--u", `${u}px`);
+
+          const cs = getComputedStyle(rootEl);
+          railTop = parseFloat(cs.getPropertyValue("--rail-top")) || 270;
+          railSag = parseFloat(cs.getPropertyValue("--rail-sag")) || 74;
+          gap = parseFloat(cs.getPropertyValue("--gap")) || 121;
+          gs = parseFloat(cs.getPropertyValue("--gs")) || 0.455;
+          start = parseFloat(cs.getPropertyValue("--start")) || 113;
+
+          pageW = pageEl.clientWidth || vw;
+          zoneTop = railZoneEl.offsetTop;
+          maxScroll = Math.max(0, (2 * start + 19 * gap) * u - pageW);
+
+          target = Math.max(0, Math.min(maxScroll, target));
+          cur = Math.max(0, Math.min(maxScroll, cur));
+
+          const s = gs * u;
+          const hitW = gap * u;
+          const hitLeft = -0.5 * hitW;
+          const shadowW = 110 * (gs / 0.48) * u;
+
+          for (let i = 0; i < pieces.length; i++) {
+            const p = pieces[i];
+            const hSide = CROPS.side[p.k][1];
+            const faceH = (hSide + 6) * s;
+
+            applyCrop(p.side, "side", p.k, s);
+            applyCrop(p.front, "front", p.k, s);
+
+            p.shadow.style.top = `${faceH + 4 * u}px`;
+            p.shadow.style.width = `${shadowW}px`;
+
+            p.hit.style.left = `${hitLeft}px`;
+            p.hit.style.width = `${hitW}px`;
+            p.hit.style.height = `${faceH}px`;
+          }
+
+          drawRail(pageW);
+          lastDrawnW = pageW;
+          positionPieces();
+          updateProgress();
+
+          if (qvOpenIdx >= 0) {
+            layoutQuickViewImage(pieces[qvOpenIdx].k);
+          }
+
+          if (cartOpen) {
+            renderCartThumbnails();
+          }
+          return true;
+        }
+
+        function positionPieces() {
+          for (let i = 0; i < pieces.length; i++) {
+            const p = pieces[i];
+            const x = (start + i * gap) * u - cur + p.offset;
+            const y = railY(x, pageW) - 3 * u - zoneTop;
+            p.g.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0)`;
+          }
+        }
+
+        function updateProgress() {
+          const pct = maxScroll > 0 ? Math.max(0, Math.min(1, cur / maxScroll)) : 0;
+          progThumbEl.style.left = `${(pct * 42).toFixed(3)}%`;
+        }
+
+        function setHover(idx) {
+          if (hoveredIdx === idx) return;
+          if (hoveredIdx >= 0) {
+            pieces[hoveredIdx].g.classList.remove("hov");
+          }
+          hoveredIdx = idx;
+          if (hoveredIdx >= 0) {
+            const p = pieces[hoveredIdx];
+            p.g.classList.add("hov");
+            hovNameEl.textContent = NAMES[p.k];
+            stageEl.classList.add("has-hov");
+          } else {
+            stageEl.classList.remove("has-hov");
+          }
+        }
+
+        // Hover & click handlers on pieces
+        let didDrag = false;
+
+        pieces.forEach((p) => {
+          p.hit.addEventListener("pointerenter", (e) => {
+            if (e.pointerType !== "mouse" || isDragging || isAddingToCart || qvOpenIdx >= 0) return;
+            setHover(p.i);
+          });
+
+          p.hit.addEventListener("pointerleave", (e) => {
+            if (e.pointerType !== "mouse") return;
+            if (hoveredIdx === p.i) {
+              setHover(-1);
+            }
+          });
+
+          p.hit.addEventListener("click", (e) => {
+            if (didDrag || isAddingToCart) {
+              e.preventDefault();
+              return;
+            }
+            const isTouchInteraction = isTouchPrimary || (e.pointerType && e.pointerType !== "mouse");
+            if (isTouchInteraction && hoveredIdx !== p.i) {
+              setHover(p.i);
+              return;
+            }
+            openQuickView(p.i);
+          });
+        });
+
+        // Drag scrolling on rail zone
+        let dragStartX = 0;
+        let dragStartTarget = 0;
+        let dragActive = false;
+        let lastMoveX = 0;
+        let lastMoveT = 0;
+        let releaseVel = 0;
+
+        railZoneEl.addEventListener("pointerdown", (e) => {
+          if (e.button !== 0 && e.pointerType === "mouse") return;
+          if (qvOpenIdx >= 0 || isAddingToCart) return;
+
+          dragActive = true;
+          isDragging = false;
+          didDrag = false;
+          dragStartX = e.clientX;
+          dragStartTarget = target;
+          lastMoveX = e.clientX;
+          lastMoveT = performance.now();
+          releaseVel = 0;
+        });
+
+        window.addEventListener("pointermove", (e) => {
+          if (!dragActive) return;
+          const dx = e.clientX - dragStartX;
+          if (!isDragging && Math.abs(dx) > 6) {
+            isDragging = true;
+            didDrag = true;
+            railZoneEl.classList.add("dragging");
+            setHover(-1);
+          }
+          if (isDragging) {
+            target = Math.max(0, Math.min(maxScroll, dragStartTarget - dx * 1.15));
+            const now = performance.now();
+            const dt = now - lastMoveT;
+            if (dt > 0) {
+              const instVel = (e.clientX - lastMoveX) / dt;
+              releaseVel = releaseVel * 0.4 + instVel * 0.6;
+              lastMoveX = e.clientX;
+              lastMoveT = now;
+            }
+          }
+        });
+
+        function endDrag() {
+          if (!dragActive) return;
+          dragActive = false;
+          if (isDragging) {
+            const age = performance.now() - lastMoveT;
+            if (age < 80) {
+              target = Math.max(0, Math.min(maxScroll, target - releaseVel * 260));
+            }
+            isDragging = false;
+            railZoneEl.classList.remove("dragging");
+            setTimeout(() => {
+              didDrag = false;
+            }, 0);
+          }
+        }
+
+        window.addEventListener("pointerup", endDrag);
+        window.addEventListener("pointercancel", endDrag);
+
+        // Touch tap outside pieces clears hover
+        stageEl.addEventListener("click", (e) => {
+          if (!isTouchPrimary) return;
+          if (!e.target.closest(".hit") && hoveredIdx >= 0) {
+            setHover(-1);
+          }
+        });
+
+        // Wheel scroll anywhere when quick-view is closed (and not scrolling cart drawer list)
+        window.addEventListener(
+          "wheel",
+          (e) => {
+            if (qvOpenIdx >= 0) return;
+            if (cartOpen && e.target.closest(".drawer")) return;
+            e.preventDefault();
+            const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+            target = Math.max(0, Math.min(maxScroll, target + delta * 0.9));
+          },
+          { passive: false }
+        );
+
+        // Keyboard navigation
+        window.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") {
+            if (qvOpenIdx >= 0) {
+              closeQuickView();
+            } else if (cartOpen) {
+              closeCart();
+            }
+            return;
+          }
+          if (document.activeElement === searchInputEl) return;
+          if (qvOpenIdx >= 0 || cartOpen) return;
+          if (e.key === "ArrowRight") {
+            target = Math.max(0, Math.min(maxScroll, target + gap * u));
+          } else if (e.key === "ArrowLeft") {
+            target = Math.max(0, Math.min(maxScroll, target - gap * u));
+          }
+        });
+
+        // Search pill interaction: scroll rail to matching garment
+        searchPillEl.addEventListener("click", () => {
+          if (cartOpen) {
+            closeCart();
+          }
+          searchInputEl.focus();
+        });
+
+        searchInputEl.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            const q = searchInputEl.value.trim().toLowerCase();
+            if (!q) return;
+            const found = pieces.find((p) => NAMES[p.k].toLowerCase().includes(q));
+            if (found) {
+              const desiredX = pageW * 0.5;
+              const idealScroll = (start + found.i * gap) * u - desiredX;
+              target = Math.max(0, Math.min(maxScroll, idealScroll));
+              setHover(found.i);
+            }
+          }
+        });
+
+        // Nav "The Rail" and footer "Shop the Collection" subtle scroll actions
+        navRailLinkEl.addEventListener("click", () => {
+          target = 0;
+        });
+
+        shopLinkEl.addEventListener("click", () => {
+          const next = target + gap * u * 3;
+          target = next > maxScroll - gap * u * 0.5 ? 0 : Math.min(maxScroll, next);
+        });
+
+        // Quick-view logic
+        function computeQuickViewScale(k) {
+          const vw = window.innerWidth;
+          if (vw > 820) {
+            return 0.9 * u;
+          }
+          const panelTop = qvInfoEl.getBoundingClientRect().top;
+          const availH = Math.max(120 * u, panelTop - 64 * u - 10 * u);
+          const maxH = Math.max(CROPS.front[k][1], CROPS.back[k][1]) + 6;
+          return Math.min(0.46 * u, availH / maxH);
+        }
+
+        function layoutQuickViewImage(k) {
+          qvScale = computeQuickViewScale(k);
+          applyCrop(qvFrontEl, "front", k, qvScale);
+          applyCrop(qvBackEl, "back", k, qvScale);
+        }
+
+        function setQuickViewTab(view) {
+          if (view === qvView) return;
+          if (view === "back" && !sheetLoaded.back) {
+            const tok = qvToken;
+            sheetPromises.back.then(() => {
+              if (tok !== qvToken || qvOpenIdx < 0) return;
+              applyQuickViewTab("back");
+            });
+            return;
+          }
+          applyQuickViewTab(view);
+        }
+
+        function applyQuickViewTab(view) {
+          qvView = view;
+          const isBack = view === "back";
+          qvImgEl.classList.toggle("show-back", isBack);
+          tabFrontEl.classList.toggle("active", !isBack);
+          tabBackEl.classList.toggle("active", isBack);
+          tabFrontEl.setAttribute("aria-selected", String(!isBack));
+          tabBackEl.setAttribute("aria-selected", String(isBack));
+        }
+
+        function setQuickViewSize(size) {
+          qvSize = size;
+          sizeButtons.forEach((btn) => {
+            const active = btn.dataset.size === size;
+            btn.classList.toggle("active", active);
+            btn.setAttribute("aria-checked", String(active));
+          });
+        }
+
+        tabFrontEl.addEventListener("click", () => setQuickViewTab("front"));
+        tabBackEl.addEventListener("click", () => setQuickViewTab("back"));
+        sizeButtons.forEach((btn) => {
+          btn.addEventListener("click", () => setQuickViewSize(btn.dataset.size));
+        });
+
+        qvProductLinkEl.addEventListener("click", () => {
+          setQuickViewTab(qvView === "front" ? "back" : "front");
+        });
+
+        function openQuickView(idx) {
+          if (isAddingToCart) return;
+          if (cartOpen) closeCart();
+
+          const tok = ++qvToken;
+          qvImgEl.getAnimations().forEach((a) => a.cancel());
+          qvAnim = null;
+
+          // Unhide any previously hidden piece
+          pieces.forEach((p) => p.g.classList.remove("qv-hidden"));
+
+          const p = pieces[idx];
+          const wasHovered = hoveredIdx === idx;
+          const srcEl = wasHovered ? p.front : p.side;
+          const srcRect = srcEl.getBoundingClientRect();
+
+          qvOpenIdx = idx;
+          qvCounterEl.textContent = `${idx + 1} / 20`;
+          qvNameEl.textContent = NAMES[p.k];
+          qvMetaNameEl.textContent = NAMES[p.k];
+
+          applyQuickViewTab("front");
+          setQuickViewSize("S");
+          qvAddEl.classList.remove("adding");
+          qvAddTextEl.textContent = "Add to cart";
+
+          qvEl.classList.remove("open", "closing");
+          void qvEl.offsetWidth;
+
+          document.body.classList.add("qv-open");
+          qvEl.classList.add("open");
+          qvEl.setAttribute("aria-hidden", "false");
+
+          // Measure info panel position after text is populated so mobile scale is exact
+          layoutQuickViewImage(p.k);
+          p.g.classList.add("qv-hidden");
+          setHover(-1);
+
+          if (reducedMotion) {
+            qvImgEl.style.transform = "translate(0px, 0px) scale(1)";
+            qvImgEl.style.opacity = "1";
+            return;
+          }
+
+          const vw = window.innerWidth;
+          const dstHookX = vw > 820 ? 440 * u : vw * 0.5;
+          const dstHookY = (vw > 820 ? 62 : 64) * u;
+          const dstHeight = (CROPS.front[p.k][1] + 6) * qvScale;
+
+          const srcCenterX = srcRect.left + srcRect.width * 0.5;
+          const srcTop = srcRect.top;
+          const scale0 = dstHeight > 0 ? srcRect.height / dstHeight : 0.5;
+          const dx = srcCenterX - dstHookX;
+          const dy = srcTop - dstHookY;
+
+          qvAnim = qvImgEl.animate(
+            [
+              {
+                transform: `translate(${dx}px, ${dy}px) scale(${scale0})`,
+                opacity: 0.6,
+              },
+              {
+                transform: "translate(0px, 0px) scale(1)",
+                opacity: 1,
+              },
+            ],
+            {
+              duration: 700,
+              easing: "cubic-bezier(.22,1,.36,1)",
+              fill: "both",
+            }
+          );
+
+          qvAnim.onfinish = () => {
+            if (tok !== qvToken) return;
+            qvAnim = null;
+          };
+        }
+
+        function closeQuickView() {
+          if (qvOpenIdx < 0 || isAddingToCart) return;
+
+          const tok = ++qvToken;
+          qvImgEl.getAnimations().forEach((a) => a.cancel());
+          qvAnim = null;
+
+          const idx = qvOpenIdx;
+          const p = pieces[idx];
+
+          document.body.classList.remove("qv-open");
+
+          if (reducedMotion) {
+            qvOpenIdx = -1;
+            qvEl.classList.remove("open", "closing");
+            qvEl.setAttribute("aria-hidden", "true");
+            p.g.classList.remove("qv-hidden");
+            return;
+          }
+
+          qvEl.classList.remove("open");
+          qvEl.classList.add("closing");
+
+          const srcRect = p.side.getBoundingClientRect();
+          const vw = window.innerWidth;
+          const dstHookX = vw > 820 ? 440 * u : vw * 0.5;
+          const dstHookY = (vw > 820 ? 62 : 64) * u;
+          const activeCrop = qvView === "back" ? CROPS.back[p.k] : CROPS.front[p.k];
+          const dstHeight = (activeCrop[1] + 6) * qvScale;
+
+          const srcCenterX = srcRect.left + srcRect.width * 0.5;
+          const srcTop = srcRect.top;
+          const scaleEnd = dstHeight > 0 ? srcRect.height / dstHeight : 0.5;
+          const dx = srcCenterX - dstHookX;
+          const dy = srcTop - dstHookY;
+
+          qvOpenIdx = -1;
+
+          qvAnim = qvImgEl.animate(
+            [
+              {
+                transform: "translate(0px, 0px) scale(1)",
+                opacity: 1,
+              },
+              {
+                transform: `translate(${dx}px, ${dy}px) scale(${scaleEnd})`,
+                opacity: 0,
+              },
+            ],
+            {
+              duration: 520,
+              easing: "cubic-bezier(.55,0,.2,1)",
+              fill: "forwards",
+            }
+          );
+
+          qvAnim.onfinish = () => {
+            if (tok !== qvToken) return;
+            qvAnim = null;
+            qvEl.classList.remove("open", "closing");
+            qvEl.setAttribute("aria-hidden", "true");
+            qvImgEl.getAnimations().forEach((a) => a.cancel());
+            p.g.classList.remove("qv-hidden");
+          };
+        }
+
+        qvCloseEl.addEventListener("click", closeQuickView);
+
+        // Add to cart & fly into bag
+        function addItemToCart(k, size) {
+          cart.unshift({
+            id: nextCartId++,
+            k,
+            size,
+            qty: 1,
+            isNew: true,
+          });
+          updateCartBadgeAndSummary();
+          if (cartOpen) {
+            renderCartRows();
+          }
+        }
+
+        function totalCartQty() {
+          return cart.reduce((sum, item) => sum + item.qty, 0);
+        }
+
+        function updateCartBadgeAndSummary() {
+          const count = totalCartQty();
+          bagBadgeEl.textContent = String(count);
+          bagBtnEl.setAttribute("aria-label", `Open cart, ${count} item${count === 1 ? "" : "s"}`);
+          drawerChipEl.textContent = String(count);
+          drawerTotalEl.textContent = fmtCurrency(count * PRICE);
+          checkoutBtnEl.disabled = count === 0;
+        }
+
+        qvAddEl.addEventListener("click", () => {
+          if (qvOpenIdx < 0 || isAddingToCart) return;
+
+          const idx = qvOpenIdx;
+          const p = pieces[idx];
+          const chosenSize = qvSize;
+
+          if (reducedMotion) {
+            const tok = ++qvToken;
+            if (qvAnim) {
+              qvAnim.cancel();
+              qvAnim = null;
+            }
+            qvOpenIdx = -1;
+            document.body.classList.remove("qv-open");
+            qvEl.classList.remove("open");
+            qvEl.setAttribute("aria-hidden", "true");
+            p.g.classList.remove("qv-hidden");
+            addItemToCart(p.k, chosenSize);
+            return;
+          }
+
+          isAddingToCart = true;
+          qvAddEl.classList.add("adding");
+          qvAddTextEl.textContent = "Adding…";
+
+          setTimeout(() => {
+            if (qvOpenIdx !== idx) {
+              isAddingToCart = false;
+              return;
+            }
+
+            const activeFaceEl = qvView === "back" ? qvBackEl : qvFrontEl;
+            const faceRect = activeFaceEl.getBoundingClientRect();
+
+            // Clone showing face as fixed element at exact screen rectangle
+            const clone = document.createElement("div");
+            clone.style.position = "fixed";
+            clone.style.left = `${faceRect.left}px`;
+            clone.style.top = `${faceRect.top}px`;
+            clone.style.width = `${faceRect.width}px`;
+            clone.style.height = `${faceRect.height}px`;
+            clone.style.margin = "0";
+            clone.style.zIndex = "60";
+            clone.style.pointerEvents = "none";
+            clone.style.transformOrigin = "50% 42%";
+            clone.style.backgroundImage = activeFaceEl.style.backgroundImage;
+            clone.style.backgroundSize = activeFaceEl.style.backgroundSize;
+            clone.style.backgroundPosition = activeFaceEl.style.backgroundPosition;
+            clone.style.backgroundRepeat = "no-repeat";
+            document.body.appendChild(clone);
+
+            // Close quick-view without return flight
+            const tok = ++qvToken;
+            qvImgEl.getAnimations().forEach((a) => a.cancel());
+            qvAnim = null;
+            qvOpenIdx = -1;
+            document.body.classList.remove("qv-open");
+            qvEl.classList.remove("open", "closing");
+            qvEl.setAttribute("aria-hidden", "true");
+            qvAddEl.classList.remove("adding");
+            qvAddTextEl.textContent = "Add to cart";
+            isAddingToCart = false;
+
+            // Reappear piece on hook with small drop and sway nudge
+            p.g.classList.remove("qv-hidden");
+            p.drop.animate(
+              [
+                { transform: `translateY(${-24 * u}px)`, opacity: 0 },
+                { transform: "translateY(0)", opacity: 1 },
+              ],
+              {
+                duration: 520,
+                delay: 260,
+                easing: "cubic-bezier(.22,1,.36,1)",
+                fill: "backwards",
+              }
+            );
+            setTimeout(() => {
+              if (!reducedMotion) {
+                p.av += 1.4;
+              }
+            }, 260);
+
+            // Fly clone in an arc to center of bag icon
+            const bagRect = bagBtnEl.getBoundingClientRect();
+            const bagCx = bagRect.left + bagRect.width * 0.5;
+            const bagCy = bagRect.top + bagRect.height * 0.5;
+            const cloneOx = faceRect.left + faceRect.width * 0.5;
+            const cloneOy = faceRect.top + faceRect.height * 0.42;
+            const dx = bagCx - cloneOx;
+            const dy = bagCy - cloneOy;
+            const endScale = Math.max(0.04, (bagRect.height * 1.6) / Math.max(1, faceRect.height));
+
+            const flyAnim = clone.animate(
+              [
+                { transform: "translate(0px, 0px) scale(1)", opacity: 1 },
+                {
+                  transform: `translate(${dx * 0.45}px, ${dy * 0.45 - 90 * u}px) scale(${(1 + endScale) * 0.42})`,
+                  opacity: 0.9,
+                  offset: 0.45,
+                },
+                { transform: `translate(${dx}px, ${dy}px) scale(${endScale})`, opacity: 0.35 },
+              ],
+              {
+                duration: 820,
+                easing: "cubic-bezier(.55,.05,.35,1)",
+                fill: "forwards",
+              }
+            );
+
+            flyAnim.onfinish = () => {
+              clone.remove();
+              addItemToCart(p.k, chosenSize);
+
+              bagBadgeEl.animate(
+                [
+                  { transform: "scale(1)" },
+                  { transform: "scale(1.45)" },
+                  { transform: "scale(1)" },
+                ],
+                {
+                  duration: 500,
+                  easing: "cubic-bezier(.3,1.6,.5,1)",
+                }
+              );
+
+              bagBtnEl.animate(
+                [
+                  { transform: "scale(1) rotate(0deg)" },
+                  { transform: "scale(1.22) rotate(-6deg)", offset: 0.35 },
+                  { transform: "scale(0.94) rotate(0deg)", offset: 0.7 },
+                  { transform: "scale(1) rotate(0deg)" },
+                ],
+                {
+                  duration: 520,
+                  easing: "ease-out",
+                }
+              );
+            };
+          }, 1000);
+        });
+
+        // Cart drawer rendering & controls
+        function renderCartThumbnails() {
+          const thumbEls = drawerListEl.querySelectorAll(".cart-thumb-crop");
+          const thumbW = 76 * u;
+          const thumbH = 96 * u;
+          thumbEls.forEach((el) => {
+            const k = Number(el.dataset.k);
+            const [y, h, hookX] = CROPS.front[k];
+            const s = Math.min((thumbW - 4 * u) / 340, (thumbH - 4 * u) / (h + 6));
+            el.style.width = `${340 * s}px`;
+            el.style.height = `${(h + 6) * s}px`;
+            el.style.backgroundImage = `url("${SHEETS.front}")`;
+            el.style.backgroundSize = `${1360 * s}px auto`;
+            el.style.backgroundPosition = `${-(hookX - 170) * s}px ${-y * s}px`;
+          });
+        }
+
+        function renderCartRows() {
+          drawerListEl.innerHTML = "";
+          if (cart.length === 0) {
+            const empty = document.createElement("div");
+            empty.className = "drawer-empty";
+            empty.textContent = "Your bag is empty.";
+            drawerListEl.appendChild(empty);
+            updateCartBadgeAndSummary();
+            return;
+          }
+
+          cart.forEach((item) => {
+            const row = document.createElement("div");
+            row.className = "cart-row" + (item.isNew ? " is-new" : "");
+            item.isNew = false;
+
+            const thumb = document.createElement("div");
+            thumb.className = "cart-thumb";
+            const thumbCrop = document.createElement("div");
+            thumbCrop.className = "cart-thumb-crop";
+            thumbCrop.dataset.k = String(item.k);
+            thumb.appendChild(thumbCrop);
+
+            const info = document.createElement("div");
+            info.className = "cart-info";
+
+            const nameEl = document.createElement("div");
+            nameEl.className = "cart-name";
+            nameEl.textContent = NAMES[item.k];
+
+            const metaEl = document.createElement("div");
+            metaEl.className = "cart-meta";
+            metaEl.innerHTML = `Size ${item.size}<br>${fmtCurrency(PRICE)}`;
+
+            const controls = document.createElement("div");
+            controls.className = "cart-controls";
+
+            const stepper = document.createElement("div");
+            stepper.className = "stepper";
+
+            const decBtn = document.createElement("button");
+            decBtn.type = "button";
+            decBtn.textContent = "−";
+            decBtn.setAttribute("aria-label", `Decrease quantity of ${NAMES[item.k]}`);
+            decBtn.addEventListener("click", () => {
+              if (item.qty > 1) {
+                item.qty -= 1;
+                renderCartRows();
+              } else {
+                const idx = cart.indexOf(item);
+                if (idx >= 0) cart.splice(idx, 1);
+                renderCartRows();
+              }
+            });
+
+            const valEl = document.createElement("span");
+            valEl.className = "stepper-val";
+            valEl.textContent = String(item.qty);
+
+            const incBtn = document.createElement("button");
+            incBtn.type = "button";
+            incBtn.textContent = "+";
+            incBtn.setAttribute("aria-label", `Increase quantity of ${NAMES[item.k]}`);
+            incBtn.addEventListener("click", () => {
+              item.qty += 1;
+              renderCartRows();
+            });
+
+            stepper.appendChild(decBtn);
+            stepper.appendChild(valEl);
+            stepper.appendChild(incBtn);
+
+            const trashBtn = document.createElement("button");
+            trashBtn.className = "trash-btn";
+            trashBtn.type = "button";
+            trashBtn.setAttribute("aria-label", `Remove ${NAMES[item.k]}`);
+            trashBtn.innerHTML =
+              '<svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 4.5h12M6.5 4.5V3h5v1.5M5 4.5l.8 10.5h6.4L13 4.5" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+            trashBtn.addEventListener("click", () => {
+              const idx = cart.indexOf(item);
+              if (idx >= 0) cart.splice(idx, 1);
+              renderCartRows();
+            });
+
+            controls.appendChild(stepper);
+            controls.appendChild(trashBtn);
+
+            info.appendChild(nameEl);
+            info.appendChild(metaEl);
+            info.appendChild(controls);
+
+            const lineTotal = document.createElement("div");
+            lineTotal.className = "cart-line-total";
+            lineTotal.textContent = fmtCurrency(item.qty * PRICE);
+
+            row.appendChild(thumb);
+            row.appendChild(info);
+            row.appendChild(lineTotal);
+            drawerListEl.appendChild(row);
+          });
+
+          renderCartThumbnails();
+          updateCartBadgeAndSummary();
+        }
+
+        function openCart() {
+          if (qvOpenIdx >= 0) return;
+          cartOpen = true;
+          renderCartRows();
+          document.body.classList.add("cart-open");
+          drawerEl.setAttribute("aria-hidden", "false");
+        }
+
+        function closeCart() {
+          cartOpen = false;
+          document.body.classList.remove("cart-open");
+          drawerEl.setAttribute("aria-hidden", "true");
+          drawerNoteEl.textContent = "Taxes and shipping calculated at checkout.";
+        }
+
+        bagBtnEl.addEventListener("click", () => {
+          if (cartOpen) closeCart();
+          else openCart();
+        });
+
+        drawerCloseEl.addEventListener("click", closeCart);
+
+        checkoutBtnEl.addEventListener("click", () => {
+          if (totalCartQty() === 0) return;
+          drawerNoteEl.textContent = "Order reserved — an atelier specialist will confirm your fitting.";
+        });
+
+        // Load sequence
+        function startIntro() {
+          if (introStarted) return;
+          introStarted = true;
+          rootEl.classList.remove("is-loading");
+
+          if (reducedMotion) return;
+
+          pieces.forEach((p, i) => {
+            p.drop.animate(
+              [
+                { transform: `translateY(${-42 * u}px)`, opacity: 0, filter: "blur(6px)" },
+                { transform: "translateY(0)", opacity: 1, filter: "blur(0px)" },
+              ],
+              {
+                duration: 620,
+                delay: i * 70,
+                easing: "cubic-bezier(.2,.9,.3,1)",
+                fill: "backwards",
+              }
+            );
+
+            p.shadow.animate(
+              [{ opacity: 0 }, { opacity: 1 }],
+              {
+                duration: 420,
+                delay: i * 70 + 200,
+                easing: "ease-out",
+                fill: "backwards",
+              }
+            );
+
+            setTimeout(() => {
+              if (!reducedMotion) {
+                p.av += i % 2 === 0 ? 1.6 : -1.6;
+              }
+            }, i * 70 + 420);
+          });
+
+          const words = headlineEl.querySelectorAll(".headline-word");
+          words.forEach((w, j) => {
+            w.animate(
+              [
+                { filter: "blur(12px)", opacity: 0, transform: `translateY(${6 * u}px)` },
+                { filter: "blur(0px)", opacity: 1, transform: "translateY(0)" },
+              ],
+              {
+                duration: 820,
+                delay: 60 + j * 110,
+                easing: "cubic-bezier(.25,.8,.3,1)",
+                fill: "backwards",
+              }
+            );
+          });
+
+          footLeftEl.animate([{ opacity: 0 }, { opacity: 1 }], {
+            duration: 420,
+            delay: 600,
+            easing: "ease-out",
+            fill: "backwards",
+          });
+          progEl.animate([{ opacity: 0 }, { opacity: 1 }], {
+            duration: 420,
+            delay: 680,
+            easing: "ease-out",
+            fill: "backwards",
+          });
+          footRightEl.animate([{ opacity: 0 }, { opacity: 1 }], {
+            duration: 420,
+            delay: 760,
+            easing: "ease-out",
+            fill: "backwards",
+          });
+        }
+
+        const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
+        Promise.all([fontsReady, sheetPromises.side, sheetPromises.front]).then(() => {
+          requestAnimationFrame(startIntro);
+        });
+        setTimeout(startIntro, 2500);
+
+        // Main animation loop
+        let lastTime = performance.now();
+
+        function tick(now) {
+          const rawDt = (now - lastTime) / 16.667;
+          lastTime = now;
+          const dt = Math.min(3, Math.max(0.01, rawDt));
+
+          // Check if .page width changed (e.g., during cart drawer transition)
+          const curPageW = pageEl.clientWidth;
+          if (curPageW > 0 && curPageW !== lastDrawnW) {
+            pageW = curPageW;
+            maxScroll = Math.max(0, (2 * start + 19 * gap) * u - pageW);
+            target = Math.max(0, Math.min(maxScroll, target));
+            cur = Math.max(0, Math.min(maxScroll, cur));
+            drawRail(pageW);
+            lastDrawnW = pageW;
+          }
+
+          // Scroll inertia
+          const prevCur = cur;
+          const easeFactor = 1 - Math.pow(1 - 0.085, dt);
+          cur += (target - cur) * easeFactor;
+          if (Math.abs(target - cur) < 0.01) {
+            cur = target;
+          }
+          vel = (cur - prevCur) / dt;
+
+          // Neighbor push offsets & sway spring
+          const pushScale = (gs / 0.48) * u;
+          const swayTarget = Math.max(-7, Math.min(7, -vel * 0.22));
+          const damp = Math.pow(0.88, dt);
+
+          for (let i = 0; i < pieces.length; i++) {
+            const p = pieces[i];
+
+            let desiredOffset = 0;
+            if (hoveredIdx >= 0) {
+              const d = i - hoveredIdx;
+              const mag = PUSH_TABLE[Math.min(Math.abs(d), 4)];
+              desiredOffset = (d > 0 ? 1 : d < 0 ? -1 : 0) * mag * pushScale;
+            }
+            p.offset += (desiredOffset - p.offset) * Math.min(1, 0.16 * dt);
+            if (Math.abs(desiredOffset - p.offset) < 0.02) {
+              p.offset = desiredOffset;
+            }
+
+            if (!reducedMotion) {
+              p.av += (swayTarget - p.a) * 0.05 * dt;
+              p.av *= damp;
+              p.a += p.av * dt;
+              if (Math.abs(p.a) < 0.002 && Math.abs(p.av) < 0.002 && swayTarget === 0) {
+                p.a = 0;
+                p.av = 0;
+              }
+              p.sway.style.transform = `rotate(${p.a.toFixed(3)}deg)`;
+            }
+          }
+
+          positionPieces();
+          updateProgress();
+
+          requestAnimationFrame(tick);
+        }
+
+        window.addEventListener("resize", () => {
+          layoutMetrics();
+        });
+
+        layoutMetrics();
+        updateCartBadgeAndSummary();
+        requestAnimationFrame(tick);
+      })();
+    </script>
+  </body>
+</html>
